@@ -1,5 +1,6 @@
 import { addToCart, getCart } from "./localStorage.js";
 const checkout = document.querySelector("#checkout");
+const checkoutEffect = new Audio("checkout.mp3");
 
 export function createProductCard(product, onAddToCart) {
   const card = document.createElement("div");
@@ -74,5 +75,10 @@ function cartHelper(items) {
   }
 }
 checkout.addEventListener("click", () => {
-  alert("Sorry. It was just too good to be true.");
+  checkoutEffect.play().catch((error) => {
+    console.error("Audio playback failed:", error);
+  });
+  setTimeout(() => {
+    alert("Sorry. It was just too good to be true.");
+  }, "2100");
 });
