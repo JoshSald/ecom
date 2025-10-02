@@ -2,7 +2,7 @@ export const checkoutEffect = () => {
   const audio = new Audio("checkout.mp3");
 
   const latency = 0.044;
-  const peaks = [0.542, 0.707, 1.009, 1.312, 1.457, 1.761, 2.192];
+  const peaks = [0.543, 0.691, 0.994, 1.29, 1.44, 1.741, 2.192];
   const lastPeakIndex = peaks.length - 1;
   const triggered = new Array(peaks.length).fill(false);
 
