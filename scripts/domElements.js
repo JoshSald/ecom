@@ -1,10 +1,10 @@
 import { addToCart, getCart } from "./localStorage.js";
-const checkout = document.querySelector("#checkout");
-const checkoutEffect = new Audio("checkout.mp3");
+import { checkoutEffect } from "./checkout.js";
 
 export function createProductCard(product, onAddToCart) {
   const card = document.createElement("div");
-  card.className = "bg-white rounded-lg shadow p-4 flex flex-col text-center";
+  card.className =
+    "card bg-white rounded-lg shadow p-4 flex flex-col text-center";
 
   const img = document.createElement("img");
   img.src = product.image;
@@ -44,7 +44,7 @@ export function renderProducts(products, container, onAddToCart) {
 export function renderCart(container, onRemove) {
   const cart = getCart();
   container.innerHTML = "";
-  cartHelper(cart.length);
+
   cart.forEach((item) => {
     const li = document.createElement("li");
     li.className =
@@ -62,6 +62,7 @@ export function renderCart(container, onRemove) {
     li.append(text, button);
     container.appendChild(li);
   });
+  cartHelper(cart.length);
 }
 
 function cartHelper(items) {
@@ -74,11 +75,4 @@ function cartHelper(items) {
     cart.classList.add("hidden");
   }
 }
-checkout.addEventListener("click", () => {
-  checkoutEffect.play().catch((error) => {
-    console.error("Audio playback failed:", error);
-  });
-  setTimeout(() => {
-    alert("Sorry. It was just too good to be true.");
-  }, "2100");
-});
+checkout.addEventListener("click", checkoutEffect);
