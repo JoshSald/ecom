@@ -37,6 +37,13 @@ export function renderProducts(products, container, onAddToCart) {
 
 export function renderCart(container, onRemove) {
   const cart = getCart();
+  const checkout = document.querySelector("#checkout");
+  if (cart.length > 0) {
+    checkout.classList.remove("hidden");
+  } else {
+    checkout.classList.add("hidden");
+  }
+
   container.innerHTML = "";
   cart.forEach((item) => {
     const li = document.createElement("li");
@@ -54,5 +61,8 @@ export function renderCart(container, onRemove) {
 
     li.append(text, button);
     container.appendChild(li);
+  });
+  checkout.addEventListener("click", () => {
+    alert("Sorry. It was just too good to be true.");
   });
 }
