@@ -3,9 +3,6 @@ name: Build & Deploy React App
 on:
   push:
     branches:
-      - main  # run workflow on pushes to main
-  pull_request:
-    branches:
       - main
 
 jobs:
@@ -13,35 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout code
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      # 2. Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 20.x
           cache: 'npm'
+      - run: npm install
+      - run: npm run build
 
-      # 3. Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # 4. Build the project
-      - name: Build project
-        run: npm run build
-
-      # 5. Configure GitHub Pages
       - name: Configure Pages
         uses: actions/configure-pages@v3
 
-      # 6. Upload the dist folder as the artifact to deploy
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: dist
 
-      # 7. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
